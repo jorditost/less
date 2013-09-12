@@ -60,6 +60,10 @@
     text-rendering: optimizeLegibility;
 }
 
+.no-text() {
+    text-indent: -9999px;
+}
+
 ///////////////////////
 // BACKGROUND Mixins
 ///////////////////////
@@ -93,22 +97,10 @@
 .background-image-devices(@filename, @ext, @image-size, @pos: 0 0, @repeat: no-repeat) {
     
     .background-image('@{filename}.@{ext}', @pos, @repeat);
-    .background-size(@image-size);
-
-    // Retina Display
-    @media only screen and (-webkit-min-device-pixel-ratio: 1.5), 
-        only screen and (-moz-min-device-pixel-ratio: 1.5), 
-        only screen and (-o-min-device-pixel-ratio: 3/2), 
-        only screen and (min-device-pixel-ratio: 1.5) { 
-    // @media 
-    // (-webkit-min-device-pixel-ratio: 2), 
-    // (min-resolution: 192dpi) {
-         & { 
-             background-image: url('@{filename}@2x.@{ext}');
-         } 
-    }
+    .background-image-retina('@{filename}@2x.@{ext}', @image-size);
 }
 
+// Unset background image to prevent loading
 .background-image-devices-none() {
     
     background-image: none;
@@ -128,6 +120,7 @@
     } 
 }
 
+// Set background size
 .background-size(@size) {
     -moz-background-size: @size;
     -o-background-size: @size;
