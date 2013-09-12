@@ -44,9 +44,10 @@
 // COLOR Mixins
 /////////////////
 
-// .hex2rgba(@color, @alpha) {
-//     rgba(red(@color), green(@color), blue(@color), 0.75);
-// }
+.rgba(@hex, @alpha) {
+    background-color: @hex;
+    background-color: rgba(red(@hex), green(@hex), blue(@hex), @alpha);
+}
 
 /////////////////
 // FONT Mixins
