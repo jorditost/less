@@ -319,11 +319,22 @@
     box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
 }
 
+/////////////////
+// CSS3 Resets
+/////////////////
+
 .appearance(@value) {
     -webkit-appearance: @value;
     -moz-appearance:    @value;
     appearance:         @value;
 }
+
+// select boxes fix for Firefox
+.appearance-firefox-fix() {
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
 
 /////////////////////
 // CSS3 Transition
