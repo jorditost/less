@@ -49,6 +49,11 @@
     background-color: rgba(red(@hex), green(@hex), blue(@hex), @alpha);
 }
 
+.rgba(@hex, @alpha, @hex-fallback) {
+    background-color: @hex-fallback;
+    background-color: rgba(red(@hex), green(@hex), blue(@hex), @alpha);
+}
+
 /////////////////
 // FONT Mixins
 /////////////////
@@ -266,6 +271,22 @@
     &:first-child {
         margin-left: 0;
     }
+}
+
+/////////////////
+// WORD Mixins
+/////////////////
+
+.break-word() {
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+    // Non standard for webkit
+    word-break: break-word;
+
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 //////////////////
@@ -580,29 +601,31 @@
 }
 
 .arrow(top, @width, @color) {
-    .block(0, 0);
     border-left: @width solid transparent;
     border-right: @width solid transparent;
     border-bottom: @width solid @color;
+    border-top: none;
 }
 
 .arrow(right, @width, @color) {
     border-top: @width solid transparent;
     border-bottom: @width solid transparent;
     border-left: @width solid @color;
+    border-right: none;
 }
 
 .arrow(bottom, @width, @color) {
-    .block(0, 0);
     border-left: @width solid transparent;
     border-right: @width solid transparent;
     border-top: @width solid @color;
+    border-bottom: none;
 }
 
 .arrow(left, @width, @color) {
     border-top: @width solid transparent;
     border-bottom: @width solid transparent;
     border-right: @width solid @color;
+    border-left: none;
 }
 
 // User can define width and height
@@ -611,29 +634,31 @@
 }
 
 .arrow(top, @width, @height, @color) {
-    .block(0, 0);
     border-left: 0.5*@width solid transparent;
     border-right: 0.5*@width solid transparent;
     border-bottom: @height solid @color;
+    border-top: none;
 }
 
 .arrow(right, @width, @height, @color) {
     border-top: 0.5*@height solid transparent;
     border-bottom: 0.5*@height solid transparent;
     border-left: @width solid @color;
+    border-right: none;
 }
 
 .arrow(bottom, @width, @height, @color) {
-    .block(0, 0);
     border-left: 0.5*@width solid transparent;
     border-right: 0.5*@width solid transparent;
     border-top: @height solid @color;
+    border-bottom: none;
 }
 
 .arrow(left, @width, @height, @color) {
     border-top: 0.5*@height solid transparent;
     border-bottom: 0.5*@height solid transparent;
     border-right: @width solid @color;
+    border-left: none;
 }
 
 // .arrow-link(@top: 5px, @color: @bright-blue, @hover-color: @dark-blue) {
