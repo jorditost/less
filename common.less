@@ -314,18 +314,49 @@
     //filter: alpha(opacity=@op);
 }
 
-// Rounded Corners
-.border-radius (@radius: 5px) {
+///////////////////
+// Border Radius
+///////////////////
+
+.border-radius(@radius: 5px) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     border-radius: @radius;
 }
 
-.border-radius-custom (@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
+.border-radius-custom(@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
     -webkit-border-radius: @topleft @topright @bottomright @bottomleft;
     -moz-border-radius: @topleft @topright @bottomright @bottomleft;
     border-radius: @topleft @topright @bottomright @bottomleft;
 }
+
+.border-top-left-radius(@radius) {
+    -webkit-border-top-left-radius: @radius;
+    -moz-border-radius-topleft: @radius;
+    border-top-left-radius: @radius;
+}
+
+.border-top-right-radius(@radius) {
+    -webkit-border-top-right-radius: @radius;
+    -moz-border-radius-topright: @radius;
+    border-top-right-radius: @radius;
+}
+
+.border-bottom-right-radius(@radius) {
+    -webkit-border-bottom-right-radius: @radius;
+    -moz-border-radius-bottomright: @radius;
+    border-bottom-right-radius: @radius;
+}
+
+.border-bottom-left-radius(@radius) {
+    -webkit-border-bottom-left-radius: @radius;
+    -moz-border-radius-bottomleft: @radius;
+    border-bottom-left-radius: @radius;
+}
+
+/////////////
+// Shadows
+/////////////
 
 // Box Shadow
 .box-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
@@ -334,6 +365,7 @@
     box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
 }
 
+// Inner box shadow
 .box-inner-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
     -webkit-box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
     -moz-box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
@@ -350,12 +382,17 @@
     appearance:         @value;
 }
 
+.appearance-important(@value) {
+    -webkit-appearance: @value !important;
+    -moz-appearance:    @value !important;
+    appearance:         @value !important;
+}
+
 // select boxes fix for Firefox
 .appearance-firefox-fix() {
     text-indent: 0.01px;
     text-overflow: '';
 }
-
 
 /////////////////////
 // CSS3 Transition
