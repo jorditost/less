@@ -11,6 +11,7 @@
 
 //@import "common-animations";
 //@import "common-vars";
+@import "easing";
 
 //////////////////////
 // FONT FACE Mixins
@@ -26,6 +27,19 @@
     font-weight: normal;
     font-style: normal;
 }
+
+.font-face2(@fontname, @fontfile) {
+    font-family: '@{fontname}';
+    src: url('fonts/@{fontfile}-webfont.eot');
+    src: url('fonts/@{fontfile}-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/@{fontfile}-webfont.woff2') format('woff2'),
+       url('fonts/@{fontfile}-webfont.woff') format('woff'),
+       url('fonts/@{fontfile}-webfont.ttf') format('truetype'),
+       url('fonts/@{fontfile}-webfont.svg#@{fontname}') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 .font-face-family (@fontname, regular) {
     font-family:'@{fontname}Regular';
@@ -43,6 +57,10 @@
 /////////////////
 // COLOR Mixins
 /////////////////
+
+.rgba(@r, @g, @b, @alpha) {
+    background-color: rgba(@r, @g, @b, @alpha);
+}
 
 .rgba(@hex, @alpha) {
     background-color: @hex;
@@ -520,6 +538,18 @@
     animation-fill-mode: @fill-mode;
 }
 
+///////////////////
+// CSS3 Filters
+///////////////////
+
+.greyscale() {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+    filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+}
+
+
 /////////////////////
 // CSS3 Gradients
 /////////////////////
@@ -580,6 +610,27 @@
 // MISCELANEOUS
 //////////////////
 
+.border-underline-color(@color) {
+    &:after {
+        border-bottom-color: @color;
+    }
+}
+
+.border-underline-shadow(@bg-color: white) {
+    
+    text-shadow: 1px 0 @bg-color, 2px 0 @bg-color, -1px 0 @bg-color, -2px 0 @bg-color, 1px 1px @bg-color, 1px -1px @bg-color, 2px 1px @bg-color, 2px -1px @bg-color, -1px 1px @bg-color, -1px -1px @bg-color, -2px 1px @bg-color, -2px -1px @bg-color;
+    //text-shadow: -@border-width 0 @bg-color, 0 @border-width @bg-color, @border-width 0 @bg-color, 0 -@border-width @bg-color;
+    z-index: 0;
+    
+    &:after {
+        z-index: -1;
+    }
+}
+
+.no-border-underline-shadow() {
+    text-shadow: none;
+}
+
 .border-underline(@bottom: 2px, @border-width: 1px, @border-style: solid, @margin-top: 2px, @height: 1em) {
     //line-height: 1.2;
     position: relative;
@@ -606,6 +657,13 @@
             display: none;
         }
         text-decoration: underline;
+    }
+}
+
+.no-border-underline() {
+    text-shadow: none;
+    &:after {
+        display: none;
     }
 }
 
@@ -782,5 +840,18 @@
     float:left;
     width:0;
     margin-top:-32767px;// thank you Erik J - negate effect of float
+    }
+}
+
+// Remove Sticky Footer
+.no-sticky-footer() {
+    // Remove sticky footer
+    #main { 
+        padding-bottom: 0; 
+    }
+
+    #footer { 
+        height: auto;
+        margin-top: 0;
     }
 }
