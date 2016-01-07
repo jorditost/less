@@ -76,7 +76,7 @@
 // FONT Mixins
 /////////////////
 
-.text-shadow(@shadow:#666666 3px 3px 3px) {
+.text-shadow(@shadow: #666666 3px 3px 3px) {
     text-shadow:@shadow;
 }
 
@@ -100,48 +100,48 @@
 
 // Set background image for Retina display
 .background-image-retina(@src, @image-size) {
-    
+
     .background-size(@image-size);
 
-    @media only screen and (-webkit-min-device-pixel-ratio: 1.5), 
-           only screen and (-moz-min-device-pixel-ratio: 1.5), 
-           only screen and (-o-min-device-pixel-ratio: 3/2), 
-           only screen and (min-device-pixel-ratio: 1.5) { 
-    // @media 
-    // (-webkit-min-device-pixel-ratio: 2), 
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+           only screen and (-moz-min-device-pixel-ratio: 1.5),
+           only screen and (-o-min-device-pixel-ratio: 3/2),
+           only screen and (min-device-pixel-ratio: 1.5) {
+    // @media
+    // (-webkit-min-device-pixel-ratio: 2),
     // (min-resolution: 192dpi) {
 
-            & { 
+            & {
                 background-image: url(@src);
-            } 
+            }
     }
 }
 
 // Set background image for diferent devices
 .background-image-devices(@filename, @ext, @image-size, @pos: 0 0, @repeat: no-repeat) {
-    
+
     .background-image('@{filename}.@{ext}', @pos, @repeat);
     .background-image-retina('@{filename}@2x.@{ext}', @image-size);
 }
 
 // Unset background image to prevent loading
 .background-image-devices-none() {
-    
+
     background-image: none;
-    
+
     // Retina Display
-    @media only screen and (-webkit-min-device-pixel-ratio: 1.5), 
-        only screen and (-moz-min-device-pixel-ratio: 1.5), 
-        only screen and (-o-min-device-pixel-ratio: 3/2), 
-        only screen and (min-device-pixel-ratio: 1.5) { 
-    // @media 
-    // (-webkit-min-device-pixel-ratio: 2), 
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+        only screen and (-moz-min-device-pixel-ratio: 1.5),
+        only screen and (-o-min-device-pixel-ratio: 3/2),
+        only screen and (min-device-pixel-ratio: 1.5) {
+    // @media
+    // (-webkit-min-device-pixel-ratio: 2),
     // (min-resolution: 192dpi) {
 
-         & { 
+         & {
              background-image: none;
-         } 
-    } 
+         }
+    }
 }
 
 // Set background size
@@ -280,7 +280,7 @@
 .grid-box(@width, @height, @margin-left, @margin-bottom) {
 
     float: left;
-    
+
     .block(@width, @height);
 
     margin-left: @margin-left;
@@ -322,9 +322,9 @@
 
     // Good browsers
     opacity: @op / 100;
-    
+
     // IE 8
-    //-ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=(@{op}))"; 
+    //-ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=(@{op}))";
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{op})";
 
     // IE 5-7
@@ -583,11 +583,11 @@
 
     // Safari 4-5, Chrome 1-9
     //background: -webkit-gradient(radial, center center, 0, center center, 460, from(@color-stop1), to @color-stop2));
-    background: -webkit-radial-gradient(circle, @color-stop1, @color-stop2); // Safari 5.1+, Chrome 10+ 
+    background: -webkit-radial-gradient(circle, @color-stop1, @color-stop2); // Safari 5.1+, Chrome 10+
     background:    -moz-radial-gradient(circle, @color-stop1, @color-stop2); // Firefox 3.6+ *
     background:     -ms-radial-gradient(circle, @color-stop1, @color-stop2); // IE 10 *
-    background:      -o-radial-gradient(circle, @color-stop1, @color-stop2); // Opera 
-    background:         radial-gradient(circle, @color-stop1, @color-stop2); // W3C Standard 
+    background:      -o-radial-gradient(circle, @color-stop1, @color-stop2); // Opera
+    background:         radial-gradient(circle, @color-stop1, @color-stop2); // W3C Standard
 }
 
 .radial-gradient(@color-stop1, @color-stop2, @fallback-img) {
@@ -617,11 +617,11 @@
 }
 
 .border-underline-shadow(@bg-color: white) {
-    
+
     text-shadow: 1px 0 @bg-color, 2px 0 @bg-color, -1px 0 @bg-color, -2px 0 @bg-color, 1px 1px @bg-color, 1px -1px @bg-color, 2px 1px @bg-color, 2px -1px @bg-color, -1px 1px @bg-color, -1px -1px @bg-color, -2px 1px @bg-color, -2px -1px @bg-color;
     //text-shadow: -@border-width 0 @bg-color, 0 @border-width @bg-color, @border-width 0 @bg-color, 0 -@border-width @bg-color;
     z-index: 0;
-    
+
     &:after {
         z-index: -1;
     }
@@ -629,6 +629,12 @@
 
 .no-border-underline-shadow() {
     text-shadow: none;
+}
+
+.border-underline-transition(@prop: all, @time: 0.1s, @ease: ease-out) {
+  &:after {
+    .transition(@prop, @time, @ease);
+  }
 }
 
 .border-underline(@bottom: 2px, @border-width: 1px, @border-style: solid, @margin-top: 2px, @height: 1em) {
@@ -661,9 +667,9 @@
 }
 
 .no-border-underline() {
-    text-shadow: none;
+    text-shadow: none !important;
     &:after {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -784,7 +790,7 @@
 // .sticky-footer(@height, @change-ie: true) when (@change-ie = true) {
 
 //     .sticky-footer(@height);
-    
+
 //     // IE styles
 //     .ie #wrap {
 //      display:table;height:100%;
@@ -798,17 +804,17 @@
 
 .sticky-footer(@height, @main-overflow: auto) {
 
-    /*  
+    /*
     Sticky Footer Solution
-    by Steve Hatcher 
+    by Steve Hatcher
     http://stever.ca
     http://www.cssstickyfooter.com
     */
 
-    * {margin:0;padding:0;} 
+    * {margin:0;padding:0;}
 
-    // must declare 0 margins on everything, also for main layout components use padding, not 
-    // vertical margins (top and bottom) to add spacing, else those margins get added to total height 
+    // must declare 0 margins on everything, also for main layout components use padding, not
+    // vertical margins (top and bottom) to add spacing, else those margins get added to total height
     // and your footer gets pushed down a bit more, creating vertical scroll bars in the browser
 
     html, body {height: 100%;}
@@ -831,7 +837,7 @@
     #footer {position: relative;
         margin-top: -@height; // negative value of footer height
         height: @height;
-        clear:both;} 
+        clear:both;}
 
     // Opera Fix
     body:before {// thanks to Maleika (Kohoutec)
@@ -846,11 +852,11 @@
 // Remove Sticky Footer
 .no-sticky-footer() {
     // Remove sticky footer
-    #main { 
-        padding-bottom: 0; 
+    #main {
+        padding-bottom: 0;
     }
 
-    #footer { 
+    #footer {
         height: auto;
         margin-top: 0;
     }
