@@ -390,6 +390,12 @@
     box-shadow: inset @x @y @blur rgba(0, 0, 0, @alpha);
 }
 
+.no-box-shadow() {
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
 /////////////////
 // CSS3 Resets
 /////////////////
@@ -606,9 +612,28 @@
     -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255,255,255,@opacity)));
 }
 
-//////////////////
-// MISCELANEOUS
-//////////////////
+///////////////////////
+// Border Underlines
+///////////////////////
+
+.border-multiline(@border-width: 1px, @color: #000, @bottom: 2px) {
+
+    background: linear-gradient(transparent 50%, @color 50%);
+    background-repeat: repeat-x;
+	background-size: 2*@border-width 2*@border-width;
+	background-position: left 0px bottom @bottom;
+	text-decoration: none;
+
+    display: inline !important;
+}
+
+.border-multiline-color(@color) {
+    background: linear-gradient(transparent 50%, @color 50%);
+}
+
+.no-border-multiline() {
+    background: none;
+}
 
 .border-underline-color(@color) {
     &:after {
@@ -629,12 +654,6 @@
 
 .no-border-underline-shadow() {
     text-shadow: none;
-}
-
-.border-underline-transition(@prop: all, @time: 0.1s, @ease: ease-out) {
-  &:after {
-    .transition(@prop, @time, @ease);
-  }
 }
 
 .border-underline(@bottom: 2px, @border-width: 1px, @border-style: solid, @margin-top: 2px, @height: 1em) {
@@ -664,6 +683,12 @@
         }
         text-decoration: underline;
     }
+}
+
+.border-underline-transition(@prop: all, @time: 0.1s, @ease: ease-out) {
+  &:after {
+    .transition(@prop, @time, @ease);
+  }
 }
 
 .no-border-underline() {
@@ -831,13 +856,17 @@
     //  height: auto;
     // }
 
-    #main {overflow: @main-overflow;
-        padding-bottom: @height;}  // must be same height as the footer
+    #main {
+        overflow: @main-overflow;
+        padding-bottom: @height;
+    }  // must be same height as the footer
 
-    #footer {position: relative;
+    #footer {
+        position: relative;
         margin-top: -@height; // negative value of footer height
         height: @height;
-        clear:both;}
+        clear:both;
+    }
 
     // Opera Fix
     body:before {// thanks to Maleika (Kohoutec)
@@ -852,6 +881,10 @@
 // Remove Sticky Footer
 .no-sticky-footer() {
     // Remove sticky footer
+
+    #wrap {
+        min-height: 0;
+    }
     #main {
         padding-bottom: 0;
     }
