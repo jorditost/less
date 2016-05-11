@@ -894,3 +894,71 @@
         margin-top: 0;
     }
 }
+
+.sticky-footer-html5(@height, @main-overflow: auto) {
+
+    /*
+    Sticky Footer Solution
+    by Steve Hatcher
+    http://stever.ca
+    http://www.cssstickyfooter.com
+    */
+
+    * {margin:0;padding:0;}
+
+    // must declare 0 margins on everything, also for main layout components use padding, not
+    // vertical margins (top and bottom) to add spacing, else those margins get added to total height
+    // and your footer gets pushed down a bit more, creating vertical scroll bars in the browser
+
+    html, body {height: 100%;}
+
+    #wrap {min-height: 100%;}
+
+    // // IE styles
+    // .ie #wrap {
+    //  display:table;height:100%;
+    // }
+    // // IE7 styles
+    // .ie7 #wrap {
+    //  display: block;
+    //  height: auto;
+    // }
+
+    main {
+        overflow: @main-overflow;
+        padding-bottom: @height;
+    }  // must be same height as the footer
+
+    footer {
+        position: relative;
+        margin-top: -@height; // negative value of footer height
+        height: @height;
+        clear:both;
+    }
+
+    // Opera Fix
+    body:before {// thanks to Maleika (Kohoutec)
+    content:"";
+    height:100%;
+    float:left;
+    width:0;
+    margin-top:-32767px;// thank you Erik J - negate effect of float
+    }
+}
+
+// Remove Sticky Footer
+.no-sticky-footer-html5() {
+    // Remove sticky footer
+
+    #wrap {
+        min-height: 0;
+    }
+    main {
+        padding-bottom: 0;
+    }
+
+    footer {
+        height: auto;
+        margin-top: 0;
+    }
+}
