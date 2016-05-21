@@ -301,14 +301,20 @@
 /////////////////
 
 .break-word() {
-    -ms-word-break: break-all;
-    word-break: break-all;
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 
-    // Non standard for webkit
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
     word-break: break-word;
 
-    -webkit-hyphens: auto;
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
     -moz-hyphens: auto;
+    -webkit-hyphens: auto;
     hyphens: auto;
 }
 
@@ -409,6 +415,12 @@
     -webkit-appearance: @value;
     -moz-appearance:    @value;
     appearance:         @value;
+}
+
+.no-button() {
+    .appearance(none);
+    border: none;
+    background-color: transparent;
 }
 
 .appearance-important(@value) {
